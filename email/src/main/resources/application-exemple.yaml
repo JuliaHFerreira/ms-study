@@ -1,0 +1,39 @@
+spring:
+  #conexão com o banco
+  datasource:
+    url: #jdbc:postgresql://nome_container/rede:porta/banco
+    username:
+    password:
+
+  #configuração de conexão
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+  #Conexão com SMTP do gmail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: #email
+    password: #senha do perfil do gmail
+    properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+
+  #Conexão do RabbitMQ
+  rabbitmq:
+    addresses: #endereçodoRabbitmq
+
+#nome da fila
+broker:
+  queue:
+    email:
+      name: default.email #Exchanges padrão + nome da fila

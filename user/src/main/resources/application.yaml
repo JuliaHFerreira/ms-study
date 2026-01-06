@@ -1,0 +1,7 @@
+#porta de conexão da aplicação
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: local #Apllicação ativa

@@ -1,0 +1,45 @@
+spring:
+  #conexão com o banco
+  datasource:
+    url: #jdbc:postgresql://nome_container/rede:porta/banco
+    username:
+    password:
+
+  #configuração de conexão
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+
+  #Conexão do RabbitMQ
+  rabbitmq:
+    addresses: #endereçodoRabbitmq
+
+  #Configuração do redis
+  data:
+    redis:
+      port: 6379
+      host: #nome redis
+  cache:
+    type: redis
+
+#nome da fila
+broker:
+  queue:
+    email:
+      name: default.email #Exchanges padrão + nome da fila
+
+#Configuração do Swagger
+springdoc:
+  swagger-ui:
+    path: /docs          # agora a UI fica em /docs
+    tags-sorter: alpha   # ordena tags em ordem alfabética
+    operations-sorter: method  # ordena endpoints por metodo HTTP (GET, POST, ...)
+
+  api-docs:
+    path: /api-docs      # JSON da doc fica em /api-docs
