@@ -5,16 +5,21 @@ spring:
     username:
     password:
 
+  #configuração do flyway
+  flyway:
+    enabled: true
+
   #configuração de conexão
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true
     show-sql: true
+    generate-ddl: false
 
   #Conexão do RabbitMQ
   rabbitmq:
