@@ -15,7 +15,8 @@ Projeto de estudo em **Java 21** focado em construir uma base sólida de **micro
 - **Cache com Redis** (Spring Cache)
 - **Swagger / OpenAPI** (documentação da API)
 - **Docker + Docker Compose** (ambiente local completo)
-- **Testes com JUnit** (e mocks quando necessário)
+- **Testes com JUnit com mocks**
+- **Jacoco** (para ver a porcentagem de teste em código)
 - **Lombok** (redução de boilerplate)
 
 ---
@@ -33,7 +34,7 @@ Fluxo típico (exemplo didático):
 
 ---
 
-📨 Mensageria (RabbitMQ)
+## 📨 Mensageria (RabbitMQ)
 
 O objetivo é praticar comunicação assíncrona entre microserviços, reduzindo acoplamento.
 
@@ -45,6 +46,6 @@ Boas práticas que você pode aplicar aqui:
 
 - ---
 
-📌 Nota
+## 📌 Nota
 
 Este repositório é exclusivamente para estudos e está em evolução contínua.
