@@ -26,10 +26,13 @@
 		<tag/>
 		<url/>
 	</scm>
-	<properties>
-		<java.version>21</java.version>
-	</properties>
-	<dependencies>
+    <properties>
+        <java.version>21</java.version>
+
+        <jacoco.unit-tests.limit.instruction-ratio>0.80</jacoco.unit-tests.limit.instruction-ratio>
+        <jacoco.unit-tests.limit.branch-ratio>0.00</jacoco.unit-tests.limit.branch-ratio>
+    </properties>
+    <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
@@ -96,7 +99,88 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+            <!--Plugin do jacoco-->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.14</version>
+
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*Application*</exclude>  <!-- pega UserApplication e qualquer Application -->
+                                <exclude>com/ms/user/configs/**</exclude>
+                                <exclude>com/ms/user/controllers/**</exclude>
+                                <exclude>com/ms/user/dtos/**</exclude>
+                                <exclude>com/ms/user/enums/**</exclude>
+                                <exclude>com/ms/user/exceptions/**</exclude>
+                                <exclude>com/ms/user/models/**</exclude>
+                                <exclude>com/ms/user/producers/**</exclude>
+                                <exclude>com/ms/user/repositories/**</exclude>
+                                <exclude>com/ms/user/scheduler/**</exclude>
+                                <exclude>**/generated/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <!-- repete excludes aqui também, pra o check ignorar as mesmas coisas -->
+                            <excludes>
+                                <exclude>**/*Application*</exclude>
+                                <exclude>com/ms/user/configs/**</exclude>
+                                <exclude>com/ms/user/controllers/**</exclude>
+                                <exclude>com/ms/user/dtos/**</exclude>
+                                <exclude>com/ms/user/enums/**</exclude>
+                                <exclude>com/ms/user/exceptions/**</exclude>
+                                <exclude>com/ms/user/models/**</exclude>
+                                <exclude>com/ms/user/producers/**</exclude>
+                                <exclude>com/ms/user/repositories/**</exclude>
+                                <exclude>com/ms/user/scheduler/**</exclude>
+                                <exclude>**/generated/**</exclude>
+                            </excludes>
+
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>INSTRUCTION</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.unit-tests.limit.instruction-ratio}</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${jacoco.unit-tests.limit.branch-ratio}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+        </plugins>
 	</build>
 
 </project>
